@@ -44,10 +44,11 @@ export default function Home() {
                 maxWidth={false}
                 style={{
                   width: "100%",
+                  marginBottom: "100px",
                 }}
                 key={widget.id}
               >
-                <BoxChart />
+                <BoxChart options={widget} />
               </Container>
             ))
           : ""}

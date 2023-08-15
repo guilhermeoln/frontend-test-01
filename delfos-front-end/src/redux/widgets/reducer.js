@@ -5,20 +5,10 @@ const initialState = {
   widgets: [
     {
       id: uuid(),
-      chart: {
-        type: "line",
-      },
-      title: {
-        text: "Valores Mensais",
-      },
-      xAxis: {
-        categories: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
-      },
-      yAxis: {
-        title: {
-          text: "Valores",
-        },
-      },
+      type: "line",
+      text: "Valores Mensais",
+      categories: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
+      textY: "Valores",
       series: [
         {
           name: "Série 1",

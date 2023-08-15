@@ -2,37 +2,30 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import "highcharts/css/highcharts.css";
 
-export default function BoxChart() {
-  const options = {
+export default function BoxChart({ options }) {
+  console.log("OPTIONS", options);
+
+  const optionsChart = {
     chart: {
-      type: "line",
+      type: options.type,
     },
     title: {
-      text: "Valores Semestrais",
+      text: options.text,
     },
     xAxis: {
-      categories: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
+      categories: options.categories,
     },
     yAxis: {
       title: {
-        text: "Valores",
+        text: options.textY,
       },
     },
-    series: [
-      {
-        name: "Série 1",
-        data: [10, 20, 30, 40, 50, 60],
-      },
-      {
-        name: "Série 2",
-        data: [10, 30, 30, 60, 50, 60],
-      },
-    ],
+    series: options.series,
   };
 
   return (
     <div>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact highcharts={Highcharts} options={optionsChart} />
     </div>
   );
 }

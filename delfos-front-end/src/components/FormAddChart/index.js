@@ -10,17 +10,29 @@ import {
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addWidget } from "../../redux/widgets/actions";
+import uuid from "react-uuid";
+import { toast } from "react-toastify";
 
-export default function FormAddChart() {
+export default function FormAddChart({ handleClose }) {
   const [categorie, setCategorie] = useState("");
   const [listCategories, setListCategories] = useState([]);
   const [serieName, setSerieName] = useState("");
   const [listSeries, setListSeries] = useState([]);
   const [dataSerie, setDataSerie] = useState("");
   const [listDataSerie, setListDataSerie] = useState([]);
+  const [typeChart, setTypeChart] = useState("line");
+  const [titleChart, setTitleChart] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleCategorie = (event) => {
     setCategorie(event.target.value);
+  };
+
+  const handleTitleChart = (event) => {
+    setTitleChart(event.target.value);
   };
 
   const handleListCategories = () => {
@@ -36,7 +48,7 @@ export default function FormAddChart() {
   };
 
   const handleListDataSerie = () => {
-    setListDataSerie((list) => [...list, dataSerie]);
+    setListDataSerie((list) => [...list, Number(dataSerie)]);
   };
 
   const addListSeries = () => {
@@ -46,12 +58,37 @@ export default function FormAddChart() {
     ]);
   };
 
+  const insertWidget = (event) => {
+    event.preventDefault();
+    const optionsWidget = {
+      id: uuid(),
+      type: typeChart,
+      text: titleChart,
+      categories: listCategories,
+      textY: "Valores",
+      series: listSeries,
+    };
+
+    dispatch(addWidget(optionsWidget));
+    handleClose();
+    toast("Widget adicionado com sucesso!");
+  };
+
   return (
-    <form style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+    <form
+      style={{ width: "100%", display: "flex", flexDirection: "column" }}
+      onSubmit={insertWidget}
+    >
       <FormControl>
-        <TextField id="outlined-basic" label="Título" variant="outlined" />
+        <TextField
+          id="outlined-basic"
+          label="Título"
+          variant="outlined"
+          value={titleChart}
+          onChange={handleTitleChart}
+        />
       </FormControl>
-      <FormControl style={{ marginTop: "30px" }}>
+      <FormControl style={{ marginTop: "30px" }} disabled={true}>
         <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -241,7 +278,11 @@ export default function FormAddChart() {
         </Box>
       </FormControl>
       <Box display="flex" width="100%" justifyContent="center" marginTop="40px">
-        <Button variant="contained" style={{ marginTop: "10px", width: "80%" }}>
+        <Button
+          variant="contained"
+          style={{ marginTop: "10px", width: "80%" }}
+          type="submit"
+        >
           Inserir Widget
         </Button>
       </Box>

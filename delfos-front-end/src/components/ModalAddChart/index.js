@@ -31,7 +31,7 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
             Adicionar Widget
           </Typography>
           <Box style={{ width: "100%", marginTop: "30px" }}>
-            <FormAddChart />
+            <FormAddChart handleClose={handleClose} />
           </Box>
         </Box>
       </Modal>
