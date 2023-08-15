@@ -60,6 +60,15 @@ export default function FormAddChart({ handleClose }) {
 
   const insertWidget = (event) => {
     event.preventDefault();
+
+    if (listCategories.length === 0) {
+      toast("Insira pelo menos uma categoria!");
+      return;
+    } else if (listSeries.length === 0) {
+      toast("Insira pelo menos uma serie!");
+      return;
+    }
+
     const optionsWidget = {
       id: uuid(),
       type: typeChart,
@@ -86,6 +95,7 @@ export default function FormAddChart({ handleClose }) {
           variant="outlined"
           value={titleChart}
           onChange={handleTitleChart}
+          required
         />
       </FormControl>
       <FormControl style={{ marginTop: "30px" }} disabled={true}>
@@ -264,7 +274,7 @@ export default function FormAddChart({ handleClose }) {
             variant="contained"
             style={{ marginTop: "10px", width: "50%" }}
             disabled={
-              listDataSerie.length < listCategories.length ||
+              listDataSerie.length !== listCategories.length ||
               listCategories.length === 0
             }
             onClick={() => {
