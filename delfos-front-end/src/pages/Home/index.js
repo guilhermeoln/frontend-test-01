@@ -52,22 +52,16 @@ export default function Home() {
               key={widget.id}
             >
               <Box width="100%" display="flex" justifyContent="flex-end">
-                <Box
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    dispatch(removeWidget(widget));
-                    toast("Widget removido com sucesso!");
-                  }}
-                >
-                  <DeleteIcon
-                    style={{
-                      color: "#1975d2",
-                      cursor: "pointer",
+                <Tooltip title="Excluir">
+                  <IconButton
+                    onClick={() => {
+                      dispatch(removeWidget(widget));
+                      toast("Widget removido com sucesso!");
                     }}
-                  />
-                </Box>
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
               </Box>
               <BoxChart options={widget} />
             </Container>
