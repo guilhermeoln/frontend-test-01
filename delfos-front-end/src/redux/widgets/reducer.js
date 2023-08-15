@@ -1,4 +1,5 @@
 import uuid from "react-uuid";
+import actionsTypesWidgets from "./actionsTypes";
 
 const initialState = {
   widgets: [
@@ -8,7 +9,7 @@ const initialState = {
         type: "line",
       },
       title: {
-        text: "Gráfico Básico com Highcharts React",
+        text: "Valores Mensais",
       },
       xAxis: {
         categories: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
@@ -29,5 +30,12 @@ const initialState = {
 };
 
 export default function widgetsReducer(state = initialState, action) {
+  if (action.type === actionsTypesWidgets.ADD_WIDGET) {
+    return {
+      ...state,
+      widgets: [...state.widgets, action.payload],
+    };
+  }
+
   return state;
 }
