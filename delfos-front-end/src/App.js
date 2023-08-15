@@ -1,7 +1,8 @@
 import Button from "@mui/material/Button";
+import RoutesApp from "./routes";
 
 function App() {
-  return <div></div>;
+  return <RoutesApp />;
 }
 
 export default App;
