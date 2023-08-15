@@ -15,6 +15,7 @@ export default function Header() {
       }}
     >
       <Container
+        maxWidth="xl"
         style={{
           display: "flex",
           justifyContent: "space-between",
