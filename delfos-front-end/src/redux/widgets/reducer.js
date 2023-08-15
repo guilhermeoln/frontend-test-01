@@ -25,6 +25,13 @@ export default function widgetsReducer(state = initialState, action) {
       ...state,
       widgets: [...state.widgets, action.payload],
     };
+  } else if (action.type === actionsTypesWidgets.REMOVE_WIDGET) {
+    return {
+      ...state,
+      widgets: state.widgets.filter(
+        (widget) => widget.id !== action.payload.id
+      ),
+    };
   }
 
   return state;

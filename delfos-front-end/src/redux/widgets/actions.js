@@ -6,3 +6,10 @@ export const addWidget = (widget) => {
     payload: widget,
   };
 };
+
+export const removeWidget = (widget) => {
+  return {
+    type: actionsTypesWidgets.REMOVE_WIDGET,
+    payload: widget,
+  };
+};

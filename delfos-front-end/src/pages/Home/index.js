@@ -5,10 +5,13 @@ import "highcharts/css/highcharts.css";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
-import { addWidget } from "../../redux/widgets/actions";
+import { addWidget, removeWidget } from "../../redux/widgets/actions";
 import uuid from "react-uuid";
 import { useState } from "react";
 import ModalAddChart from "../../components/ModalAddChart";
+import { Box, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -38,20 +41,40 @@ export default function Home() {
           alignItems: "center",
         }}
       >
-        {widgets.length > 0
-          ? widgets.map((widget) => (
-              <Container
-                maxWidth={false}
-                style={{
-                  width: "100%",
-                  marginBottom: "100px",
-                }}
-                key={widget.id}
-              >
-                <BoxChart options={widget} />
-              </Container>
-            ))
-          : ""}
+        {widgets.length > 0 ? (
+          widgets.map((widget) => (
+            <Container
+              maxWidth={false}
+              style={{
+                width: "100%",
+                marginBottom: "100px",
+              }}
+              key={widget.id}
+            >
+              <Box width="100%" display="flex" justifyContent="flex-end">
+                <Box
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    dispatch(removeWidget(widget));
+                    toast("Widget removido com sucesso!");
+                  }}
+                >
+                  <DeleteIcon
+                    style={{
+                      color: "#1975d2",
+                      cursor: "pointer",
+                    }}
+                  />
+                </Box>
+              </Box>
+              <BoxChart options={widget} />
+            </Container>
+          ))
+        ) : (
+          <Typography>Você não possui Widgets ativos!</Typography>
+        )}
       </Container>
       <Tooltip title="Adicionar Widget">
         <IconButton
