@@ -21,7 +21,7 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
           sx={{
             position: "absolute",
             overflowY: !isLargeThan800 && "scroll",
-            maxHeight: !isLargeThan800 && "80vh",
+            maxHeight: !isLargeThan800 && "80%",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
