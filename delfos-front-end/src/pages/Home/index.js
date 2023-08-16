@@ -34,8 +34,7 @@ export default function Home() {
     dispatch(filterWidgets(search));
   }, [search, dispatch]);
 
-  const ativeWidgets =
-    filteredWidgets.length > 0 && search.length > 0 ? filteredWidgets : widgets;
+  const ativeWidgets = search.length > 0 ? filteredWidgets : widgets;
 
   return (
     <Container
@@ -56,6 +55,13 @@ export default function Home() {
           alignItems: "center",
         }}
       >
+        {search.length > 0 && (
+          <Typography position="absolute" fontSize="14px" top="5px">
+            {filteredWidgets.length > 1
+              ? `${filteredWidgets.length} widgets encontrados!`
+              : `${filteredWidgets.length} widget encontrado!`}
+          </Typography>
+        )}
         {widgets.length > 0 ? (
           ativeWidgets.map((widget) => (
             <Container
