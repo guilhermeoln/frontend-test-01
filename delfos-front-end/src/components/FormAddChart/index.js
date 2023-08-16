@@ -126,7 +126,12 @@ export default function FormAddChart({ handleClose }) {
 
   return (
     <form
-      style={{ width: "100%", display: "flex", flexDirection: "column" }}
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
       onSubmit={insertWidget}
     >
       <FormControl>

@@ -16,11 +16,10 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        disableScrollLock={true}
       >
         <Box
           sx={{
-            position: "absolute",
+            position: "fixed",
             top: isLargeThan800 ? "50%" : "60%",
             left: "50%",
             transform: "translate(-50%, -50%)",
