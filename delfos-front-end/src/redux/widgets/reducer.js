@@ -45,6 +45,16 @@ export default function widgetsReducer(state = initialState, action) {
       ...state,
       filteredWidgets: filteredWidgets,
     };
+  } else if (action.type === actionsTypesWidgets.UPDATE_WIDGET) {
+    const indexWidgetSelected = state.widgets.findIndex(
+      (widget) => widget.id === action.payload.id
+    );
+
+    state.widgets[indexWidgetSelected] = action.payload;
+
+    return {
+      ...state,
+    };
   }
 
   return state;

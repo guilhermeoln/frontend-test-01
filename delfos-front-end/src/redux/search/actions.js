@@ -6,3 +6,9 @@ export const addSearch = (searchValue) => {
     payload: searchValue,
   };
 };
+
+export const clearSearch = () => {
+  return {
+    type: actionsTypesSearch.CLEAR_SEARCH,
+  };
+};

@@ -10,13 +10,14 @@ import {
 } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addWidget } from "../../redux/widgets/actions";
+import { addWidget, updateWidget } from "../../redux/widgets/actions";
 import uuid from "react-uuid";
 import { toast } from "react-toastify";
+import { addSearch, clearSearch } from "../../redux/search/actions";
 
-export default function FormAddChart({ handleClose }) {
+export default function FormAddChart({ handleClose, chart }) {
   const [categorie, setCategorie] = useState("");
   const [listCategories, setListCategories] = useState([]);
   const [serieName, setSerieName] = useState("");
@@ -25,6 +26,16 @@ export default function FormAddChart({ handleClose }) {
   const [listDataSerie, setListDataSerie] = useState([]);
   const [typeChart, setTypeChart] = useState("line");
   const [titleChart, setTitleChart] = useState("");
+
+  const isEditForm = chart.id;
+
+  useEffect(() => {
+    if (isEditForm) {
+      setListCategories(chart.categories);
+      setTitleChart(chart.text);
+      setListSeries(chart.series);
+    }
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -102,16 +113,8 @@ export default function FormAddChart({ handleClose }) {
   const insertWidget = (event) => {
     event.preventDefault();
 
-    if (listCategories.length === 0) {
-      toast("Insira pelo menos uma categoria!");
-      return;
-    } else if (listSeries.length === 0) {
-      toast("Insira pelo menos uma serie!");
-      return;
-    }
-
     const optionsWidget = {
-      id: uuid(),
+      id: isEditForm ? chart.id : uuid(),
       type: typeChart,
       text: titleChart,
       categories: listCategories,
@@ -119,7 +122,22 @@ export default function FormAddChart({ handleClose }) {
       series: listSeries,
     };
 
+    if (listCategories.length === 0) {
+      toast("Insira pelo menos uma categoria!");
+      return;
+    } else if (listSeries.length === 0) {
+      toast("Insira pelo menos uma serie!");
+      return;
+    } else if (isEditForm) {
+      dispatch(updateWidget(optionsWidget));
+      dispatch(clearSearch());
+      handleClose();
+      toast("Widget editado com sucesso!");
+      return;
+    }
+
     dispatch(addWidget(optionsWidget));
+    dispatch(clearSearch());
     handleClose();
     toast("Widget adicionado com sucesso!");
   };
@@ -402,7 +420,7 @@ export default function FormAddChart({ handleClose }) {
           style={{ marginTop: "10px", width: "80%" }}
           type="submit"
         >
-          Inserir Widget
+          {isEditForm ? "Editar Widget" : "Inserir Widget"}
         </Button>
       </Box>
     </form>

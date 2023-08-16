@@ -16,10 +16,13 @@ import { useEffect, useState } from "react";
 import ModalAddChart from "../../components/ModalAddChart";
 import { Box, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const [selectedChart, setSelectedChart] = useState({});
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -74,6 +77,16 @@ export default function Home() {
               key={widget.id}
             >
               <Box width="100%" display="flex" justifyContent="flex-end">
+                <Tooltip title="Editar">
+                  <IconButton
+                    onClick={() => {
+                      setSelectedChart(widget);
+                      handleOpen();
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
                 <Tooltip title="Excluir">
                   <IconButton
                     onClick={() => {
@@ -112,6 +125,7 @@ export default function Home() {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
+        chart={selectedChart}
       />
     </Container>
   );
