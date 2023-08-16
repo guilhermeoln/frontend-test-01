@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  FormHelperText,
   InputBase,
   InputLabel,
   MenuItem,
@@ -299,7 +300,10 @@ export default function FormAddChart({ handleClose }) {
           value={dataSerie}
           onChange={handleDataSerie}
         />
-
+        <FormHelperText>
+          OBS: Cada categoria tem que ter o seu valor. Ex: Se tiver 3
+          categorias, terá que ter 3 valores.
+        </FormHelperText>
         <Box
           padding="10px 0px"
           display="flex"
