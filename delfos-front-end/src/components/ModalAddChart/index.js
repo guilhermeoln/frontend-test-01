@@ -20,10 +20,10 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
         <Box
           sx={{
             position: "absolute",
-            top: "50%",
+            top: isLargeThan800 ? "50%" : "60%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: isLargeThan800 ? 400 : 300,
+            width: isLargeThan800 ? 400 : "80%",
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: "8px",
