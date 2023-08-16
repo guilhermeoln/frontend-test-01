@@ -259,6 +259,11 @@ export default function FormAddChart({ handleClose, chart }) {
           value={serieName}
           onChange={handleSerieName}
         />
+        <FormHelperText style={{ fontSize: "11px" }}>
+          As series são as variações do gráfico, você pode ter várias séries mas
+          todas elas tem que ter a quantidade de valores igual a quantidade de
+          categorias.
+        </FormHelperText>
         <Box
           padding="10px 0px"
           display="flex"
@@ -326,9 +331,9 @@ export default function FormAddChart({ handleClose, chart }) {
           value={dataSerie}
           onChange={handleDataSerie}
         />
-        <FormHelperText>
+        <FormHelperText style={{ fontSize: "11px" }}>
           OBS: Cada categoria tem que ter o seu valor. Ex: Se tiver 3
-          categorias, terá que ter 3 valores.
+          categorias, cada variação terá que ter 3 valores.
         </FormHelperText>
         <Box
           padding="10px 0px"

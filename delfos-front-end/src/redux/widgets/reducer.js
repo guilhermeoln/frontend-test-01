@@ -12,8 +12,20 @@ const initialState = {
       textY: "Valores",
       series: [
         {
-          name: "Série 1",
+          name: "Impostos",
           data: [10, 20, 30, 40, 50, 60],
+        },
+        {
+          name: "Comércio",
+          data: [10, 20, 30, 40, 50, 60],
+        },
+        {
+          name: "Pessoal",
+          data: [10, 50, 30, 60, 50, 70],
+        },
+        {
+          name: "Empresa",
+          data: [10, 20, 320, 550, 50, 60],
         },
       ],
     },
