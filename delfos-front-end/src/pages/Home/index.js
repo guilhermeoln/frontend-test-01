@@ -5,6 +5,7 @@ import "highcharts/css/highcharts.css";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   addWidget,
   filterWidgets,
