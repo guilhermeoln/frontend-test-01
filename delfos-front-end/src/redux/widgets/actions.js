@@ -20,3 +20,10 @@ export const filterWidgets = (searchValue) => {
     payload: searchValue,
   };
 };
+
+export const updateWidget = (widget) => {
+  return {
+    type: actionsTypesWidgets.UPDATE_WIDGET,
+    payload: widget,
+  };
+};

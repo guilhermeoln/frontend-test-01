@@ -6,7 +6,12 @@ import Modal from "@mui/material/Modal";
 import FormAddChart from "../FormAddChart";
 import { useMediaQuery } from "@mui/material";
 
-export default function ModalAddChart({ open, handleOpen, handleClose }) {
+export default function ModalAddChart({
+  open,
+  handleOpen,
+  handleClose,
+  chart = {},
+}) {
   const isLargeThan800 = useMediaQuery("(min-width:800px)");
 
   return (
@@ -45,7 +50,7 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
           </Box>
 
           <Box style={{ width: "100%", marginTop: "30px" }}>
-            <FormAddChart handleClose={handleClose} />
+            <FormAddChart handleClose={handleClose} chart={chart} />
           </Box>
         </Box>
       </Modal>
