@@ -13,3 +13,10 @@ export const removeWidget = (widget) => {
     payload: widget,
   };
 };
+
+export const filterWidgets = (searchValue) => {
+  return {
+    type: actionsTypesWidgets.FILTER_WIDGETS,
+    payload: searchValue,
+  };
+};

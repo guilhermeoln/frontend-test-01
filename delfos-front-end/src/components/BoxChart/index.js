@@ -3,8 +3,6 @@ import Highcharts from "highcharts";
 import "highcharts/css/highcharts.css";
 
 export default function BoxChart({ options }) {
-  console.log("OPTIONS", options);
-
   const optionsChart = {
     chart: {
       type: options.type,
@@ -24,7 +22,7 @@ export default function BoxChart({ options }) {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <HighchartsReact highcharts={Highcharts} options={optionsChart} />
     </div>
   );

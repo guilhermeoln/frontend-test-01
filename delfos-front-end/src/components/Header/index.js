@@ -1,8 +1,15 @@
 import Container from "@mui/material/Container";
 import logoDelfos from "../../assets/delfos-logo.png";
 import TextField from "@mui/material/TextField";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { addSearch } from "../../redux/search/actions";
 
 export default function Header() {
+  const [searchValue, setSearchValue] = useState("");
+
+  const dispatch = useDispatch();
+
   return (
     <Container
       maxWidth={false}
@@ -32,6 +39,11 @@ export default function Header() {
           label="Search"
           variant="outlined"
           size="small"
+          value={searchValue}
+          onChange={(event) => {
+            setSearchValue(event.target.value);
+            dispatch(addSearch(event.target.value));
+          }}
         />
       </Container>
     </Container>
