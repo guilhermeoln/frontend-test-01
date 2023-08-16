@@ -5,9 +5,13 @@ import "highcharts/css/highcharts.css";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
-import { addWidget, removeWidget } from "../../redux/widgets/actions";
+import {
+  addWidget,
+  filterWidgets,
+  removeWidget,
+} from "../../redux/widgets/actions";
 import uuid from "react-uuid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalAddChart from "../../components/ModalAddChart";
 import { Box, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,9 +22,20 @@ export default function Home() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const widgets = useSelector((state) => state.widgetsReducer.widgets);
+  const { widgets, search, filteredWidgets } = useSelector((state) => ({
+    widgets: state.widgetsReducer.widgets,
+    filteredWidgets: state.widgetsReducer.filteredWidgets,
+    search: state.searchReducer.search,
+  }));
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(filterWidgets(search));
+  }, [search, dispatch]);
+
+  const ativeWidgets =
+    filteredWidgets.length > 0 && search.length > 0 ? filteredWidgets : widgets;
 
   return (
     <Container
@@ -42,7 +57,7 @@ export default function Home() {
         }}
       >
         {widgets.length > 0 ? (
-          widgets.map((widget) => (
+          ativeWidgets.map((widget) => (
             <Container
               maxWidth={false}
               style={{

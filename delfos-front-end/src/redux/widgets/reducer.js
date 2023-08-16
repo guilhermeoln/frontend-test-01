@@ -1,5 +1,6 @@
 import uuid from "react-uuid";
 import actionsTypesWidgets from "./actionsTypes";
+import { filterWidgets } from "./actions";
 
 const initialState = {
   widgets: [
@@ -17,6 +18,7 @@ const initialState = {
       ],
     },
   ],
+  filteredWidgets: [],
 };
 
 export default function widgetsReducer(state = initialState, action) {
@@ -31,6 +33,17 @@ export default function widgetsReducer(state = initialState, action) {
       widgets: state.widgets.filter(
         (widget) => widget.id !== action.payload.id
       ),
+    };
+  } else if (action.type === actionsTypesWidgets.FILTER_WIDGETS) {
+    const copyWidgets = state.widgets.slice();
+
+    const filteredWidgets = copyWidgets.filter((widget) =>
+      widget.text.toLowerCase().includes(action.payload.toLowerCase())
+    );
+
+    return {
+      ...state,
+      filteredWidgets: filteredWidgets,
     };
   }
 
