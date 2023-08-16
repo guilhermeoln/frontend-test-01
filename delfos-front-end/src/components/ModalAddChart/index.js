@@ -19,8 +19,10 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
       >
         <Box
           sx={{
-            position: "fixed",
-            top: isLargeThan800 ? "50%" : "60%",
+            position: "absolute",
+            overflowY: !isLargeThan800 && "scroll",
+            maxHeight: !isLargeThan800 && "80vh",
+            top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             width: isLargeThan800 ? 400 : "80%",
@@ -30,9 +32,18 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
             p: 4,
           }}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Adicionar Widget
-          </Typography>
+          <Box
+            width="100%"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Adicionar Widget
+            </Typography>
+            <Typography onClick={handleClose}>X</Typography>
+          </Box>
+
           <Box style={{ width: "100%", marginTop: "30px" }}>
             <FormAddChart handleClose={handleClose} />
           </Box>
