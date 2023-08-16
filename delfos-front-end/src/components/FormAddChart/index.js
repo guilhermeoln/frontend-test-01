@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
@@ -258,6 +259,11 @@ export default function FormAddChart({ handleClose, chart }) {
           value={serieName}
           onChange={handleSerieName}
         />
+        <FormHelperText style={{ fontSize: "11px" }}>
+          As series são as variações do gráfico, você pode ter várias séries mas
+          todas elas tem que ter a quantidade de valores igual a quantidade de
+          categorias.
+        </FormHelperText>
         <Box
           padding="10px 0px"
           display="flex"
@@ -279,38 +285,40 @@ export default function FormAddChart({ handleClose, chart }) {
         >
           {listSeries.length > 0 &&
             listSeries.map((serie, index) => (
-              <Typography
-                position="relative"
-                variant="caption"
-                key={index}
-                style={{
-                  padding: "5px 10px",
-                  backgroundColor: "#E3E3E3",
-                  borderRadius: "8px",
-                  marginRight: "10px",
-                }}
-              >
-                {serie.name}
-                <Box
-                  position="absolute"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  padding="2px"
-                  top="-5px"
-                  right="-5px"
-                  width="12px"
-                  height="12px"
-                  backgroundColor="white"
-                  color="red"
-                  borderRadius="50%"
-                  boxShadow="rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => deleteSerie(serie)}
+              <Tooltip title={`${serie.data.map((data) => data)}`}>
+                <Typography
+                  position="relative"
+                  variant="caption"
+                  key={index}
+                  style={{
+                    padding: "5px 10px",
+                    backgroundColor: "#E3E3E3",
+                    borderRadius: "8px",
+                    marginRight: "10px",
+                  }}
                 >
-                  X
-                </Box>
-              </Typography>
+                  {serie.name}
+                  <Box
+                    position="absolute"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    padding="2px"
+                    top="-5px"
+                    right="-5px"
+                    width="12px"
+                    height="12px"
+                    backgroundColor="white"
+                    color="red"
+                    borderRadius="50%"
+                    boxShadow="rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => deleteSerie(serie)}
+                  >
+                    X
+                  </Box>
+                </Typography>
+              </Tooltip>
             ))}
         </Box>
       </FormControl>
@@ -323,9 +331,9 @@ export default function FormAddChart({ handleClose, chart }) {
           value={dataSerie}
           onChange={handleDataSerie}
         />
-        <FormHelperText>
+        <FormHelperText style={{ fontSize: "11px" }}>
           OBS: Cada categoria tem que ter o seu valor. Ex: Se tiver 3
-          categorias, terá que ter 3 valores.
+          categorias, cada variação terá que ter 3 valores.
         </FormHelperText>
         <Box
           padding="10px 0px"
@@ -402,10 +410,12 @@ export default function FormAddChart({ handleClose, chart }) {
             style={{ marginTop: "10px", width: "50%" }}
             disabled={
               listDataSerie.length !== listCategories.length ||
-              listCategories.length === 0
+              listCategories.length === 0 ||
+              serieName.length === 0
             }
             onClick={() => {
               addListSeries();
+              toast(`Serie "${serieName}" adicionada com sucesso!`);
               setSerieName("");
               setListDataSerie([]);
             }}

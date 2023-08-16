@@ -18,6 +18,7 @@ import { Box, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
+import { clearSearch } from "../../redux/search/actions";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -94,6 +95,7 @@ export default function Home() {
                   <IconButton
                     onClick={() => {
                       dispatch(removeWidget(widget));
+                      dispatch(clearSearch());
                       toast("Widget removido com sucesso!");
                     }}
                   >
