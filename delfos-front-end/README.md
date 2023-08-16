@@ -1,6 +1,8 @@
 Desafio Front-end Delfosim
 Desafio para ingressar como Front-end Developer na Delfosim em Fortaleza-CE
 
+Link do projeto no ar: https://testedelfos.vercel.app/
+
 🚀 Começando: Para inicializar o projeto na sua máquina, primeiramente você terá que clonar o repositório: 1- crie uma pasta na sua máquina. 2- abra o terminal e acessa essa pasta criada. 3- digite o seguinte comando no terminal:
 
 git clone https://github.com/guilhermeoln/frontend-test-01.git
