@@ -22,40 +22,43 @@ const initialState = {
 };
 
 export default function widgetsReducer(state = initialState, action) {
-  if (action.type === actionsTypesWidgets.ADD_WIDGET) {
-    return {
-      ...state,
-      widgets: [...state.widgets, action.payload],
-    };
-  } else if (action.type === actionsTypesWidgets.REMOVE_WIDGET) {
-    return {
-      ...state,
-      widgets: state.widgets.filter(
-        (widget) => widget.id !== action.payload.id
-      ),
-    };
-  } else if (action.type === actionsTypesWidgets.FILTER_WIDGETS) {
-    const copyWidgets = state.widgets.slice();
+  switch (action.type) {
+    case actionsTypesWidgets.ADD_WIDGET:
+      return {
+        ...state,
+        widgets: [...state.widgets, action.payload],
+      };
+    case actionsTypesWidgets.REMOVE_WIDGET:
+      return {
+        ...state,
+        widgets: state.widgets.filter(
+          (widget) => widget.id !== action.payload.id
+        ),
+      };
+    case actionsTypesWidgets.FILTER_WIDGETS:
+      const copyWidgets = state.widgets.slice();
 
-    const filteredWidgets = copyWidgets.filter((widget) =>
-      widget.text.toLowerCase().includes(action.payload.toLowerCase())
-    );
+      const filteredWidgets = copyWidgets.filter((widget) =>
+        widget.text.toLowerCase().includes(action.payload.toLowerCase())
+      );
 
-    return {
-      ...state,
-      filteredWidgets: filteredWidgets,
-    };
-  } else if (action.type === actionsTypesWidgets.UPDATE_WIDGET) {
-    const indexWidgetSelected = state.widgets.findIndex(
-      (widget) => widget.id === action.payload.id
-    );
+      return {
+        ...state,
+        filteredWidgets: filteredWidgets,
+      };
+    case actionsTypesWidgets.UPDATE_WIDGET:
+      const indexWidgetSelected = state.widgets.findIndex(
+        (widget) => widget.id === action.payload.id
+      );
 
-    state.widgets[indexWidgetSelected] = action.payload;
+      const updatedWidgets = [...state.widgets];
+      updatedWidgets[indexWidgetSelected] = action.payload;
 
-    return {
-      ...state,
-    };
+      return {
+        ...state,
+        widgets: updatedWidgets,
+      };
+    default:
+      return state;
   }
-
-  return state;
 }
