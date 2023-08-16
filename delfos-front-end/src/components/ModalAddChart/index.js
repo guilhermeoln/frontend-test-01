@@ -16,14 +16,17 @@ export default function ModalAddChart({ open, handleOpen, handleClose }) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        disableScrollLock={true}
       >
         <Box
           sx={{
             position: "absolute",
-            top: "50%",
+            top: "60%",
             left: "50%",
+            bottom: "80%",
             transform: "translate(-50%, -50%)",
-            width: isLargeThan800 ? 400 : 300,
+            width: isLargeThan800 ? 400 : "80%",
+            height: !isLargeThan800 && "100%",
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: "8px",
