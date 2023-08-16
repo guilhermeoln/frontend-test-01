@@ -24,7 +24,10 @@ export default function Home() {
   const [selectedChart, setSelectedChart] = useState({});
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedChart({});
+  };
 
   const { widgets, search, filteredWidgets } = useSelector((state) => ({
     widgets: state.widgetsReducer.widgets,
