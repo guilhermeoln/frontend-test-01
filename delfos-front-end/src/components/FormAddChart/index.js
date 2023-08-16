@@ -56,6 +56,20 @@ export default function FormAddChart({ handleClose }) {
     setListCategories(removeCategorie);
   };
 
+  const deleteSerie = (serieSelected) => {
+    const removeSerie = listSeries.filter(
+      (itemList) => itemList.name !== serieSelected.name
+    );
+
+    setListSeries(removeSerie);
+  };
+
+  const deleteDataSerie = (data) => {
+    const removeData = listDataSerie.filter((itemList) => itemList !== data);
+
+    setListDataSerie(removeData);
+  };
+
   const handleSerieName = (event) => {
     setSerieName(event.target.value);
   };
@@ -69,6 +83,15 @@ export default function FormAddChart({ handleClose }) {
   };
 
   const addListSeries = () => {
+    const hasCategorieSelected = listSeries.find(
+      (itemList) => itemList.name.toLowerCase() === serieName.toLowerCase()
+    );
+
+    if (hasCategorieSelected) {
+      toast("Serie já selecionada!");
+      return;
+    }
+
     setListSeries((list) => [
       ...list,
       { name: serieName, data: listDataSerie },
@@ -233,6 +256,7 @@ export default function FormAddChart({ handleClose }) {
           {listSeries.length > 0 &&
             listSeries.map((serie, index) => (
               <Typography
+                position="relative"
                 variant="caption"
                 key={index}
                 style={{
@@ -243,6 +267,25 @@ export default function FormAddChart({ handleClose }) {
                 }}
               >
                 {serie.name}
+                <Box
+                  position="absolute"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  padding="2px"
+                  top="-5px"
+                  right="-5px"
+                  width="12px"
+                  height="12px"
+                  backgroundColor="white"
+                  color="red"
+                  borderRadius="50%"
+                  boxShadow="rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => deleteSerie(serie)}
+                >
+                  X
+                </Box>
               </Typography>
             ))}
         </Box>
@@ -279,6 +322,7 @@ export default function FormAddChart({ handleClose }) {
           {listDataSerie.length > 0 &&
             listDataSerie.map((data, index) => (
               <Typography
+                position="relative"
                 variant="caption"
                 key={index}
                 style={{
@@ -289,6 +333,25 @@ export default function FormAddChart({ handleClose }) {
                 }}
               >
                 {data}
+                <Box
+                  position="absolute"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  padding="2px"
+                  top="-5px"
+                  right="-5px"
+                  width="12px"
+                  height="12px"
+                  backgroundColor="white"
+                  color="red"
+                  borderRadius="50%"
+                  boxShadow="rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => deleteDataSerie(data)}
+                >
+                  X
+                </Box>
               </Typography>
             ))}
         </Box>
